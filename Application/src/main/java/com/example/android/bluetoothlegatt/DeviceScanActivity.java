@@ -297,7 +297,7 @@ public class DeviceScanActivity extends ListActivity {
 
             BluetoothDevice device = mLeDevices.get(i);
             final int rssi = rssis.get(i);
-            final String deviceName = device.getName();
+            final String deviceName = device.getAlias();
             if (deviceName != null && deviceName.length() > 0)
                 viewHolder.deviceName.setText(deviceName);
 
