@@ -202,7 +202,7 @@ public class DeviceScanActivity extends ListActivity {
                 mLeDevices.add(device);
                 rssis.add(rssi);
 
-                String vendor = convertMacToVendor.convert(device.getAddress());
+                String vendor = convertMacToVendor.convert(device.getAddress().replace(":", ""));
                 vendors.add(vendor);
 
                 if (vendor.isEmpty()) {
