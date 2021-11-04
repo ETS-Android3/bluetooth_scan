@@ -1,4 +1,4 @@
-#Thu Nov 04 14:41:33 KST 2021
-base.0=C\:\\Users\\David\\Desktop\\BluetoothLeGatt\\Application\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Thu Nov 04 16:28:36 KST 2021
+base.0=C\:\\Users\\david\\Desktop\\bluetooth_scan\\Application\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

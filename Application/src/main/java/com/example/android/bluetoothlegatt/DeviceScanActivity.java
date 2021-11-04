@@ -16,6 +16,7 @@
 
 package com.example.android.bluetoothlegatt;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
@@ -24,8 +25,10 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +54,8 @@ public class DeviceScanActivity extends ListActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
-
+    private static int PERMISSION_REQUEST_CODE = 1;
+    private final static String TAG = DeviceScanActivity.class.getSimpleName();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +82,17 @@ public class DeviceScanActivity extends ListActivity {
             return;
         }
         // class for conversion
-        convertMacToVendor = new ConvertMacToVendor(getApplicationContext());
+        convertMacToVendor = new ConvertMacToVendor(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.BLUETOOTH,
+                    Manifest.permission.BLUETOOTH_ADMIN
+            }, PERMISSION_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -127,7 +141,22 @@ public class DeviceScanActivity extends ListActivity {
         setListAdapter(mLeDeviceListAdapter);
         scanLeDevice(true);
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        if(requestCode == PERMISSION_REQUEST_CODE)
+        {
+            //Do something based on grantResults
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Log.d(TAG, "coarse location permission granted");
+            }
+            else
+            {
+                Log.d(TAG, "coarse location permission denied");
+            }
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // User chose not to enable Bluetooth.
@@ -211,6 +240,7 @@ public class DeviceScanActivity extends ListActivity {
                     isPerson.add(true);
                 }
             }
+            mLeDeviceListAdapter.notifyDataSetChanged();
         }
 
         public BluetoothDevice getDevice(int position) {
@@ -222,6 +252,7 @@ public class DeviceScanActivity extends ListActivity {
             rssis.clear();
             vendors.clear();
             isPerson.clear();
+            mLeDeviceListAdapter.notifyDataSetChanged();
         }
 
         @Override
@@ -294,7 +325,7 @@ public class DeviceScanActivity extends ListActivity {
                 @Override
                 public void run() {
                     mLeDeviceListAdapter.addDevice(device, rssi);
-                    mLeDeviceListAdapter.notifyDataSetChanged();
+
                 }
             });
         }

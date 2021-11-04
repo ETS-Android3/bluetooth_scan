@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/David/Desktop/BluetoothLeGatt/Application/src/main/res/layout/listitem_device.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/david/Desktop/bluetooth_scan/Application/src/main/res/layout/gatt_services_characteristics.xml" value="0.2953703703703704" />
+        <entry key="..\:/Users/david/Desktop/bluetooth_scan/Application/src/main/res/layout/listitem_device.xml" value="0.2953703703703704" />
       </map>
     </option>
   </component>

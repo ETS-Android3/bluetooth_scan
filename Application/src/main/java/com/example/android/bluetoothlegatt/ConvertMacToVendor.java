@@ -1,8 +1,10 @@
 package com.example.android.bluetoothlegatt;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -18,34 +20,30 @@ import java.util.HashSet;
 
 public class ConvertMacToVendor {
     Context context;
+    Activity deviceScanActivity;
     HashMap<String, String> mac_to_vendor;
     public ConvertMacToVendor(final Context context){
         this.context=context;
-        final Handler handler = new Handler();
-        Thread thread = new Thread(new Runnable() {
+        deviceScanActivity = (Activity) context;
+        deviceScanActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mac_to_vendor = ReadJsonFile();
-                        Toast.makeText(context, "json read complete", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                mac_to_vendor = ReadJsonFile();
+                Toast.makeText(context, "json read complete", Toast.LENGTH_SHORT).show();
             }
         });
-        thread.start();
 
     }
     public String convert(String mac) {
         String vendor = "";
-        String first_six = mac.substring(0, 8);
+        String first_six = mac.substring(0, 9);
         if (mac_to_vendor.containsKey(first_six)) {
             vendor = mac_to_vendor.get(first_six);
             if (!checkVendor(vendor)){
                 vendor = "";
             }
         }
+        Log.i("convert", vendor);
         return vendor;
     }
     public HashMap<String, String> getMap() {
