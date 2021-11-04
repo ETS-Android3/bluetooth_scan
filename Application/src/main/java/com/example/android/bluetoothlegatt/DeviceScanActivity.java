@@ -258,6 +258,7 @@ public class DeviceScanActivity extends ListActivity {
                 viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
                 viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
                 viewHolder.rssiView = (TextView) view.findViewById(R.id.rssi_view);
+                viewHolder.isPersonTv = (TextView) view.findViewById(R.id.isPersonTv);
                 view.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) view.getTag();
@@ -273,6 +274,12 @@ public class DeviceScanActivity extends ListActivity {
                 viewHolder.deviceName.setText(R.string.unknown_device);
             viewHolder.deviceAddress.setText(device.getAddress());
             viewHolder.rssiView.setText(rssi+"");
+            if (isPerson.get(i)) {
+                viewHolder.isPersonTv.setText("Person");
+            } else {
+                viewHolder.isPersonTv.setText("NA");
+            }
+
             return view;
         }
     }
@@ -297,5 +304,6 @@ public class DeviceScanActivity extends ListActivity {
         TextView deviceName;
         TextView deviceAddress;
         TextView rssiView;
+        TextView isPersonTv;
     }
 }
