@@ -11,7 +11,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class ConvertMacToVendor {
     Context context;
@@ -76,7 +79,55 @@ public class ConvertMacToVendor {
     }
 
     public boolean checkVendor(String vendor){
+        HashSet<String> hashSet = new HashSet<String>();
+        boolean check = false;
+        Collections.addAll(hashSet, "Samsung", "Apple", "Xiaomi", "Huawei", "Sony");
+        Collections.addAll(hashSet, "samsung", "apple", "xiaomi", "huawei", "sony");
+        for (String sr: hashSet) {
+            if (vendor.contains(sr)) {
+                check  = true;
+                break;
+            }
+        }
+        /*
+        Collections.addAll(hashSet, "Condor", "Okapia", "Helio", "Maximus", "Walton", "Symphony",
+                "Kogan", "Gradiente", "Multilaser", "Positivo",
+                "BlackBerry Limited", "DataWind", "10.Or", "Amoi", "BBK",
+                "Coolpad", "Cubot", "Gfive", "Haier", "Hisense", "Honor", "Huawei",
+                "Konka", "LeEco", "Meitu", "Meizu", "Ningbo Bird", "OnePlus",
+                "Oppo", "iQOO", "Itel Mobile", "Realme", "Smartisan",
+                "TCL Corporation", "Technology Happy Life", "Tecno Mobile",
+                "Umidigi", "Vivo", "Vsun", "Wasam", "Xiaomi", "ZTE", "ZUK Mobile",
+                "Jablotron", "Verzo", "SICO Technology", "Jolla",
+                "Nokia Corporation", "HMD Global", "Bittium", "Archos",
+                "Alcatel Mobile", "Groupe Bull", "MobiWire", "Wiko", "Gigaset",
+                "Medion", "TechniSat", "Tiptel", "MLS", "X-tigi Mobile", "Lenovo",
+                "Infinix", "Celkon", "Iball", "Intex Technologies",
+                "Karbonn Mobiles", "Lava International", "HCL Technologies", "Jio",
+                "LYF", "Micromax Informatics", "Onida Electronics",
+                "Spice Digital", "Videocon", "Xolo", "YU Televentures", "Asia",
+                "Brondi", "New Generation Mobile", "Olivetti",
+                "Onda Mobile Communication", "Akai", "Fujitsu", "Casio", "Hitachi",
+                "JRC", "Kyocera", "Mitsubishi Electric", "NEC", "Panasonic",
+                "Sansui", "Sharp", "Sony", "Toshiba", "Just5", "M Dot",
+                "Ninetology", "Kyoto Electronics", "Lanix", "Zonda", "Fairphone",
+                "John\"s Phone", "Philips", "Arirang", "QMobile", "Voice Mobile",
+                "Cherry Mobile", "Firefly Mobile", "Starmobile", "Cloudfone",
+                "MyPhone", "Torque", "Kruger&Matz", "Manta Multimedia", "myPhone",
+                "Allview", "Evolio", "E-Boda", "Myria", "Utok", "Beeline",
+                "Explay", "Gresso", "Highscreen", "Megafon", "MTS", "RoverPC",
+                "teXet", "Sitronics", "Yotaphone", "Cell C", "MTN", "Mobicel",
+                "Telkom", "Vodacom", "KT Tech", "Pantech", "Samsung", "Doro",
+                "Acer", "Asus", "BenQ", "DBTel", "Dopod", "Foxconn",
+                "Gigabyte Technology", "HTC", "AIS", "DTAC", "True", "Wellcom",
+                "I-Mobile", "EvertekTunisie", "ASELSAN", "Vestel", "Thuraya",
+                "Bullitt Group", "Wileyfox", "Apple", "BLU Products",
+                "Caterpillar", "Firefly", "Garmin", "Google", "HP", "InFocus",
+                "InfoSonics", "Motorola Mobility", "Obi Worldphone", "Nextbit",
+                "Purism, SPC", "BPhone", "Masstel", "GTel");
+
+         */
         //TODO ... vendor in our list of phone companies ...
-        return true;
+        return check;
     }
 }
