@@ -716,6 +716,7 @@ id radio
 id right
 id right_icon
 id right_side
+id rssi_view
 id screen
 id scrollIndicatorDown
 id scrollIndicatorUp

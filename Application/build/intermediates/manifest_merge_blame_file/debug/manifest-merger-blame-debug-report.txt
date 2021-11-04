@@ -22,7 +22,7 @@
 22    <uses-sdk
 23        android:minSdkVersion="18"
 23-->C:\Users\David\Desktop\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-24        android:targetSdkVersion="28" />
+24        android:targetSdkVersion="30" />
 24-->C:\Users\David\Desktop\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 25
 26    <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
@@ -50,8 +50,8 @@
 41
 42    <application
 42-->C:\Users\David\Desktop\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:36:5-48:19
-43        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
-43-->[com.android.support:support-compat:28.0.0] C:\Users\David\.gradle\caches\transforms-2\files-2.1\6f81025bcc413a318d3343580ec76047\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+43        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+43-->[androidx.core:core:1.0.0] C:\Users\David\.gradle\caches\transforms-3\2b1010b61f15da653a4cf344006c486d\transformed\core-1.0.0\AndroidManifest.xml:22:18-86
 44        android:debuggable="true"
 45        android:icon="@drawable/ic_launcher"
 45-->C:\Users\David\Desktop\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:37:9-45

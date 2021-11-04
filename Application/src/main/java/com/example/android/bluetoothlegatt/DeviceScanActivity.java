@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
@@ -46,7 +47,7 @@ public class DeviceScanActivity extends ListActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
     private Handler mHandler;
-
+    private ConvertMacToVendor convertMacToVendor;
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
@@ -76,6 +77,8 @@ public class DeviceScanActivity extends ListActivity {
             finish();
             return;
         }
+        // class for conversion
+        convertMacToVendor = new ConvertMacToVendor(getApplicationContext());
     }
 
     @Override
@@ -181,6 +184,8 @@ public class DeviceScanActivity extends ListActivity {
     private class LeDeviceListAdapter extends BaseAdapter {
         private ArrayList<BluetoothDevice> mLeDevices;
         private ArrayList<Integer> rssis;
+        private ArrayList<String> vendors;
+        private ArrayList<Boolean> isPerson;
         private LayoutInflater mInflator;
 
         public LeDeviceListAdapter() {
@@ -188,12 +193,23 @@ public class DeviceScanActivity extends ListActivity {
             mLeDevices = new ArrayList<>();
             rssis = new ArrayList<>();
             mInflator = DeviceScanActivity.this.getLayoutInflater();
+            vendors = new ArrayList<>();
+            isPerson = new ArrayList<>();
         }
 
         public void addDevice(BluetoothDevice device, int rssi) {
             if(!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
                 rssis.add(rssi);
+
+                String vendor = convertMacToVendor.convert(device.getAddress());
+                vendors.add(vendor);
+
+                if (vendor.isEmpty()) {
+                    isPerson.add(false);
+                } else {
+                    isPerson.add(true);
+                }
             }
         }
 
@@ -204,6 +220,8 @@ public class DeviceScanActivity extends ListActivity {
         public void clear() {
             mLeDevices.clear();
             rssis.clear();
+            vendors.clear();
+            isPerson.clear();
         }
 
         @Override
@@ -221,6 +239,15 @@ public class DeviceScanActivity extends ListActivity {
             return i;
         }
 
+        public int getPeopleCount(){
+            int count = 0;
+            for(int i = 0; i < isPerson.size(); i++){
+                if (isPerson.get(i)) {
+                    count ++;
+                }
+            }
+            return count;
+        }
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             ViewHolder viewHolder;
