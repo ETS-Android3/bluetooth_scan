@@ -20,7 +20,7 @@
 20    android:versionName="1.0" >
 21
 22    <uses-sdk
-23        android:minSdkVersion="18"
+23        android:minSdkVersion="29"
 23-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml
 24        android:targetSdkVersion="30" />
 24-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml
@@ -78,40 +78,41 @@
 55        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 55-->[androidx.core:core:1.0.0] C:\Users\david\.gradle\caches\transforms-3\2b1010b61f15da653a4cf344006c486d\transformed\core-1.0.0\AndroidManifest.xml:22:18-86
 56        android:debuggable="true"
-57        android:icon="@drawable/ic_launcher"
-57-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:47:9-45
-58        android:label="@string/app_name"
-58-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:46:18-50
-59        android:testOnly="true"
-60        android:theme="@android:style/Theme.Holo.Light" >
-60-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:48:9-56
-61        <activity
-61-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:49:9-55:20
-62            android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"
-62-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:49:19-53
-63            android:label="@string/app_name" >
-63-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:50:13-45
-64            <intent-filter>
-64-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:51:13-54:29
-65                <action android:name="android.intent.action.MAIN" />
-65-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:52:17-68
-65-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:52:25-66
-66
-67                <category android:name="android.intent.category.LAUNCHER" />
-67-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:53:17-76
-67-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:53:27-74
-68            </intent-filter>
-69        </activity>
-70        <activity android:name="com.example.android.bluetoothlegatt.DeviceControlActivity" />
-70-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:56:9-58
-70-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:56:19-56
-71
-72        <service
-72-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:57:9-77
-73            android:name="com.example.android.bluetoothlegatt.BluetoothLeService"
-73-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:57:18-52
-74            android:enabled="true" />
-74-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:57:53-75
-75    </application>
-76
-77</manifest>
+57        android:extractNativeLibs="false"
+58        android:icon="@drawable/ic_launcher"
+58-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:47:9-45
+59        android:label="@string/app_name"
+59-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:46:18-50
+60        android:testOnly="true"
+61        android:theme="@android:style/Theme.Holo.Light" >
+61-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:48:9-56
+62        <activity
+62-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:49:9-55:20
+63            android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"
+63-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:49:19-53
+64            android:label="@string/app_name" >
+64-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:50:13-45
+65            <intent-filter>
+65-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:51:13-54:29
+66                <action android:name="android.intent.action.MAIN" />
+66-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:52:17-68
+66-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:52:25-66
+67
+68                <category android:name="android.intent.category.LAUNCHER" />
+68-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:53:17-76
+68-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:53:27-74
+69            </intent-filter>
+70        </activity>
+71        <activity android:name="com.example.android.bluetoothlegatt.DeviceControlActivity" />
+71-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:56:9-58
+71-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:56:19-56
+72
+73        <service
+73-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:57:9-77
+74            android:name="com.example.android.bluetoothlegatt.BluetoothLeService"
+74-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:57:18-52
+75            android:enabled="true" />
+75-->C:\Users\david\Desktop\bluetooth_scan\Application\src\main\AndroidManifest.xml:57:53-75
+76    </application>
+77
+78</manifest>

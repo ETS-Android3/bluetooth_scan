@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,17 +34,40 @@ public class ConvertMacToVendor {
             }
         });
 
+        Log.i("mac_to_vendor", mac_to_vendor.toString());
+
     }
     public String convert(String mac) {
         String vendor = "";
-        String first_six = mac.substring(0, 9);
+        Log.i("mac add", mac);
+
+        String first_six = mac.substring(0, 6);
+        String first_seven = mac.substring(0, 7);
+        String first_eight = mac.substring(0, 8);
+        String first_nine = mac.substring(0, 9);
+        String first_ten = mac.substring(0, 10);
+        String first_eleven = mac.substring(0, 11);
+        Log.i("first_six", first_six);
+        Log.i("first_seven", first_seven);
         if (mac_to_vendor.containsKey(first_six)) {
             vendor = mac_to_vendor.get(first_six);
-            if (!checkVendor(vendor)){
-                vendor = "";
-            }
+        } else if (mac_to_vendor.containsKey(first_seven)) {
+            vendor = mac_to_vendor.get(first_seven);
+        } else if (mac_to_vendor.containsKey(first_eight)) {
+            vendor = mac_to_vendor.get(first_eight);
+        } else if (mac_to_vendor.containsKey(first_nine)) {
+            vendor = mac_to_vendor.get(first_nine);
+        } else if (mac_to_vendor.containsKey(first_ten)) {
+            vendor = mac_to_vendor.get(first_ten);
+        } else if (mac_to_vendor.containsKey(first_eleven)) {
+            vendor = mac_to_vendor.get(first_eleven);
         }
-        Log.i("convert", vendor);
+        /*
+        if (!checkVendor(vendor)){
+            vendor = "";
+        }
+         */
+
         return vendor;
     }
     public HashMap<String, String> getMap() {

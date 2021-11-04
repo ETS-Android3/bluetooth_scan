@@ -297,7 +297,7 @@ public class DeviceScanActivity extends ListActivity {
 
             BluetoothDevice device = mLeDevices.get(i);
             final int rssi = rssis.get(i);
-            final String deviceName = device.getAlias();
+            final String deviceName = device.getName();
             if (deviceName != null && deviceName.length() > 0)
                 viewHolder.deviceName.setText(deviceName);
 
@@ -305,11 +305,11 @@ public class DeviceScanActivity extends ListActivity {
                 viewHolder.deviceName.setText(R.string.unknown_device);
             viewHolder.deviceAddress.setText(device.getAddress());
             viewHolder.rssiView.setText(rssi+"");
-            if (isPerson.get(i)) {
-                viewHolder.isPersonTv.setText("Person");
-            } else {
-                viewHolder.isPersonTv.setText("NA");
-            }
+            String vendor = vendors.get(i);
+
+            viewHolder.isPersonTv.setText(vendor);
+
+
 
             return view;
         }
