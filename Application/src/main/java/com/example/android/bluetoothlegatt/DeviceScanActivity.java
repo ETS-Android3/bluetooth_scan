@@ -28,6 +28,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.JsonWriter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,6 +40,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -53,7 +63,7 @@ public class DeviceScanActivity extends ListActivity {
     private ConvertMacToVendor convertMacToVendor;
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 10000;
+    private static final long SCAN_PERIOD = 60000;
     private static int PERMISSION_REQUEST_CODE = 1;
     private final static String TAG = DeviceScanActivity.class.getSimpleName();
     @Override
@@ -212,6 +222,8 @@ public class DeviceScanActivity extends ListActivity {
     // Adapter for holding devices found through scanning.
     private class LeDeviceListAdapter extends BaseAdapter {
         private ArrayList<BluetoothDevice> mLeDevices;
+
+        private JSONObject devices = new JSONObject();
         private ArrayList<Integer> rssis;
         private ArrayList<String> vendors;
         private ArrayList<Boolean> isPerson;
@@ -228,6 +240,20 @@ public class DeviceScanActivity extends ListActivity {
 
         public void addDevice(BluetoothDevice device, int rssi) {
             if(!mLeDevices.contains(device)) {
+                // json array with first index first seen , second index last seen in seconds (int)
+                JSONArray timestamp = new JSONArray();
+                try {
+                    timestamp.put(0, (int)System.currentTimeMillis()/1000);
+                    timestamp.put(1, (int) System.currentTimeMillis()/1000);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    // use device mac address as a key and jsonarray depicted above as a value
+                    devices.put(device.getAddress(),timestamp);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 mLeDevices.add(device);
                 rssis.add(rssi);
 
@@ -239,6 +265,16 @@ public class DeviceScanActivity extends ListActivity {
                 } else {
                     isPerson.add(true);
                 }
+            } else {
+                // when the device is already seen, update the last seen time
+                try {
+                    JSONArray jsonArray = devices.getJSONArray(device.getAddress());
+                    jsonArray.put(1, (int) System.currentTimeMillis()/1000);
+                    devices.put(device.getAddress(), jsonArray);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
             mLeDeviceListAdapter.notifyDataSetChanged();
         }
@@ -248,6 +284,19 @@ public class DeviceScanActivity extends ListActivity {
         }
 
         public void clear() {
+            // save devices in json format
+            String path = getFilesDir().getPath() + "/" + (int) System.currentTimeMillis()/1000 +".json";
+            try {
+                FileWriter fileWriter = new FileWriter(path);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(devices.toString());
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // then resets
+            devices = new JSONObject();
+
             mLeDevices.clear();
             rssis.clear();
             vendors.clear();
